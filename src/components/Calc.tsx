@@ -20,7 +20,9 @@ function Calc() {
             <CalcNumberKey name={7} />
             <CalcNumberKey name={8} />
             <CalcNumberKey name={9} />
-            <CalcNumberKey name={"Del"} />
+            <CalcKey className="p-4 text-center rounded-md shadow-sm bg-themeonedarkblue key shadow-themeonedarkblueshadow">
+              <span className="font-bold uppercase ">Del</span>
+            </CalcKey>
             <CalcNumberKey name={4} />
             <CalcNumberKey name={5} />
             <CalcNumberKey name={6} />
@@ -33,15 +35,12 @@ function Calc() {
             <CalcNumberKey name={0} />
             <CalcNumberKey name={"/"} />
             <CalcNumberKey name={"x"} />
-            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonedarkblue key shadow-themeonedarkblueshadow">
-              <span className="text-3xl font-bold uppercase">Reset</span>
+            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonedarkblue shadow-themeonedarkblueshadow">
+              <span className="font-bold uppercase">Reset</span>
             </CalcKey>
-            <CalcKey
-              className={
-                "col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonemyred key  shadow-themeonemydarkred"
-              }
-              name={"="}
-            />
+            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonemyred key shadow-themeonemydarkred">
+              <span className="font-bold uppercase">=</span>
+            </CalcKey>
           </Keypad>
         </div>
       </div>
