@@ -2,8 +2,9 @@
 //   children?: React.ReactNode;
 // };
 
-import CalcKeys from "./CalcKeys";
+import CalcKey from "./CalcKey";
 import CalcNumberKey from "./CalcNumberKey";
+import Keypad from "./KeyPad";
 import OutputField from "./OutputField";
 
 function Calc() {
@@ -15,7 +16,7 @@ function Calc() {
           399,981
         </OutputField>
         <div className="p-4 mt-4 rounded-md calcwrapper bg-themeonedarkblueshadow">
-          <CalcKeys className="grid grid-cols-4 gap-3">
+          <Keypad className="grid grid-cols-4 gap-3">
             <CalcNumberKey name={7} />
             <CalcNumberKey name={8} />
             <CalcNumberKey name={9} />
@@ -32,9 +33,16 @@ function Calc() {
             <CalcNumberKey name={0} />
             <CalcNumberKey name={"/"} />
             <CalcNumberKey name={"x"} />
-            <CalcNumberKey name={"Reset"} />
-            <CalcNumberKey name={"="} />
-          </CalcKeys>
+            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonedarkblue key shadow-themeonedarkblueshadow">
+              <span className="text-3xl font-bold uppercase">Reset</span>
+            </CalcKey>
+            <CalcKey
+              className={
+                "col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonemyred key  shadow-themeonemydarkred"
+              }
+              name={"="}
+            />
+          </Keypad>
         </div>
       </div>
     </>

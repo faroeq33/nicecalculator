@@ -3,11 +3,11 @@ type props = {
   className?: string;
 };
 
-function CalcKeys(props: props) {
+function Keypad(props: props) {
   return (
     <>
       <div className={props.className}>{props.children}</div>
     </>
   );
 }
-export default CalcKeys;
+export default Keypad;
