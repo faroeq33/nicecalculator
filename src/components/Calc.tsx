@@ -10,18 +10,22 @@ import OutputField from "./OutputField";
 function Calc() {
   return (
     <>
-      <div className="h-screen p-4 text-white calc-wrapper bg-themeonedarkblue">
-        <div className="text-4xl font-extrabold logo">calc</div>
-        <OutputField className="p-4 text-5xl font-extrabold text-right rounded-md outputfield bg-themeonedarkestblueshadow">
+      <div className="h-screen p-6 text-white calc-wrapper bg-themeone-key-shadow">
+        <div className="flex justify-between logo-wrapper">
+          <div className="p-6 text-4xl font-extrabold logo">calc</div>
+          <div className="p-6 text-4xl font-extrabold ">thing</div>
+        </div>
+
+        <OutputField className="p-6 text-4xl font-extrabold text-right rounded-md outputfield bg-themeone-screen-background">
           399,981
         </OutputField>
-        <div className="p-4 mt-4 rounded-md calcwrapper bg-themeonedarkblueshadow">
-          <Keypad className="grid grid-cols-4 gap-3">
+        <div className="p-4 mt-4 rounded-md shadow-sm calcwrapper bg-themeone-toggle-background shadow-themeone-key-background">
+          <Keypad className="grid grid-cols-4 gap-3 p-3">
             <CalcNumberKey name={7} />
             <CalcNumberKey name={8} />
             <CalcNumberKey name={9} />
-            <CalcKey className="p-4 text-center rounded-md shadow-sm bg-themeonedarkblue key shadow-themeonedarkblueshadow">
-              <span className="font-bold uppercase ">Del</span>
+            <CalcKey className="flex items-center justify-center text-xl text-center rounded-md shadow-sm bg-themeone-key-background key shadow-themeonedarkblueshadow ">
+              <span className="font-bold uppercase">Del</span>
             </CalcKey>
             <CalcNumberKey name={4} />
             <CalcNumberKey name={5} />
@@ -35,10 +39,12 @@ function Calc() {
             <CalcNumberKey name={0} />
             <CalcNumberKey name={"/"} />
             <CalcNumberKey name={"x"} />
-            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonedarkblue shadow-themeonedarkblueshadow">
+
+            <CalcKey className="col-span-2 p-4 text-xl text-center rounded-md shadow-sm bg-themeonedarkblue shadow-themeone-key-shadow bg-themeone-key-background">
               <span className="font-bold uppercase">Reset</span>
             </CalcKey>
-            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeonemyred key shadow-themeonemydarkred">
+
+            <CalcKey className="col-span-2 p-4 text-center rounded-md shadow-sm bg-themeone-red key shadow-themeone-dark-red">
               <span className="font-bold uppercase">=</span>
             </CalcKey>
           </Keypad>

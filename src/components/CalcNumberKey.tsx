@@ -9,9 +9,10 @@ function CalcNumberKey(props: props) {
     <>
       <div
         key={props.key}
-        className="text-center rounded-md shadow-sm text-themeonedarkblueshadow key bg-themeonelightgreyorange shadow-themeonegreyorange"
+        className="p-4 text-center rounded-md shadow-sm shadow-themeone-grayish-orange bg-themeone-light-grayish-orange"
       >
-        <span className="text-3xl font-bold text-themeonedarkblue">
+        {" "}
+        <span className="text-4xl font-bold text-themeone-very-dark-grayish-blue">
           {props.name}
         </span>
       </div>
