@@ -2,23 +2,61 @@
 //   children?: React.ReactNode;
 // };
 
+import { useState } from "react";
 import CalcKey from "./CalcKey";
 import CalcNumberKey from "./CalcNumberKey";
 import Keypad from "./KeyPad";
 import OutputField from "./OutputField";
 
 function Calc() {
+  const [theme, setTheme] = useState(1);
+
+  const increment = () => {
+    if (theme >= 3) {
+      setTheme(1);
+      return;
+    }
+    setTheme(theme + 1);
+  };
+
   return (
     <>
       <div className="h-screen p-6 text-white calc-wrapper bg-themeone-key-shadow">
         <div className="flex justify-between logo-wrapper">
-          <div className="p-6 text-4xl font-extrabold logo">calc</div>
-          <div className="p-6 text-4xl font-extrabold ">thing</div>
+          <div className="py-6 text-4xl font-bold">calc</div>
+          <div className="w-1/2 py-6 text-xl font-extrabold">
+            <div className="flex flex-wrap">
+              <div className="w-1/2"></div>
+              <div className="w-1/2">
+                <div className="flex justify-between px-2 py-1 text-sm">
+                  <div className="w-4 h-4 text-center">1</div>
+                  <div className="w-4 h-4 text-center">2</div>
+                  <div className="w-4 h-4 text-center">3</div>
+                </div>
+              </div>
+              <div className="w-1/2 text-sm uppercase">theme</div>
+              <div className="w-1/2">
+                <div
+                  className={`flex ${theme === 1 ? "justify-start" : ""} ${
+                    theme === 2 ? "justify-center" : ""
+                  } ${
+                    theme === 3 ? "justify-end" : ""
+                  } w-full bg-themeone-toggle-background p-2 rounded-full cursor-pointer`}
+                  onClick={increment}
+                >
+                  <div className="w-4 h-4 rounded-full bg-themeone-red shadow-themeone-key-shadow">
+                    {/* {theme} */}
+                  </div>
+                </div>
+              </div>{" "}
+            </div>
+          </div>
         </div>
 
         <OutputField className="p-6 text-4xl font-extrabold text-right rounded-md outputfield bg-themeone-screen-background">
           399,981
         </OutputField>
+
         <div className="p-4 mt-4 rounded-md shadow-sm calcwrapper bg-themeone-toggle-background shadow-themeone-key-background">
           <Keypad className="grid grid-cols-4 gap-3 p-3">
             <CalcNumberKey name={7} />
