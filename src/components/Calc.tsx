@@ -7,6 +7,7 @@ import CalcKey from "./CalcKey";
 import CalcNumberKey from "./CalcNumberKey";
 import Keypad from "./KeyPad";
 import OutputField from "./OutputField";
+import ToggleItem from "./ToggleItem";
 
 function Calc() {
   const [theme, setTheme] = useState(1);
@@ -25,16 +26,16 @@ function Calc() {
         <div className="flex justify-between logo-wrapper">
           <div className="py-6 text-4xl font-bold">calc</div>
           <div className="w-1/2 py-6 text-xl font-extrabold">
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap items-center">
               <div className="w-1/2"></div>
               <div className="w-1/2">
                 <div className="flex justify-between px-2 py-1 text-sm">
-                  <div className="w-4 h-4 text-center">1</div>
-                  <div className="w-4 h-4 text-center">2</div>
-                  <div className="w-4 h-4 text-center">3</div>
+                  <ToggleItem>1</ToggleItem>
+                  <ToggleItem>2</ToggleItem>
+                  <ToggleItem>3</ToggleItem>
                 </div>
               </div>
-              <div className="w-1/2 text-sm uppercase">theme</div>
+              <div className="w-1/2 h-4 text-xs uppercase">theme</div>
               <div className="w-1/2">
                 <div
                   className={`flex ${theme === 1 ? "justify-start" : ""} ${
