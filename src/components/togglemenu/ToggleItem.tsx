@@ -6,7 +6,7 @@ type props = {
 function ToggleItem(props: props) {
   return (
     <>
-      <div className="w-4 h-4 text-center">{props.children}</div>
+      <div className="w-1/2">{props.children}</div>
     </>
   );
 }

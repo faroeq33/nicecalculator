@@ -22,14 +22,17 @@ The designs were created to the following widths:
 
 #### Keys
 
-- Desaturated dark blue (key background): hsl(225, 21%, 49%)
-- Desaturated dark blue (key shadow): hsl(224, 28%, 35%)
+- tertiaryKey
+  - Desaturated dark blue (key background): hsl(225, 21%, 49%)
+  - Desaturated dark blue (key shadow): hsl(224, 28%, 35%)
 
-- Red (key background, toggle): hsl(6, 63%, 50%)
-- Dark red (key shadow): hsl(6, 70%, 34%)
+- secondaryKey
+  - Red (key background, toggle): hsl(6, 63%, 50%)
+  - Dark red (key shadow): hsl(6, 70%, 34%)
 
-- Light grayish orange (key background): hsl(30, 25%, 89%)
-- Grayish orange (key shadow): hsl(28, 16%, 65%)
+- primaryKey
+  - Light grayish orange (key background): hsl(30, 25%, 89%)
+  - Grayish orange (key shadow): hsl(28, 16%, 65%)
 
 #### Text
 
@@ -45,15 +48,17 @@ The designs were created to the following widths:
 - Very light gray (screen background): hsl(0, 0%, 93%)
 
 #### Keys
+- tertiaryKey
+  - Dark moderate cyan (key background): hsl(185, 42%, 37%)
+  - Very dark cyan (key shadow): hsl(185, 58%, 25%)
 
-- Dark moderate cyan (key background): hsl(185, 42%, 37%)
-- Very dark cyan (key shadow): hsl(185, 58%, 25%)
+- secondaryKey
+  - Orange (key background, toggle): hsl(25, 98%, 40%)
+  - Dark orange (key shadow): hsl(25, 99%, 27%)
 
-- Orange (key background, toggle): hsl(25, 98%, 40%)
-- Dark orange (key shadow): hsl(25, 99%, 27%)
-
-- Light grayish yellow (key background): hsl(45, 7%, 89%)
-- Dark grayish orange (key shadow): hsl(35, 11%, 61%)
+- primaryKey
+  - Light grayish yellow (key background): hsl(45, 7%, 89%)
+  - Dark grayish orange (key shadow): hsl(35, 11%, 61%)
 
 #### Text
 
@@ -68,18 +73,19 @@ The designs were created to the following widths:
 - Very dark violet (toggle background, keypad background, screen background): hsl(268, 71%, 12%)
 
 #### Keys
+- tertiaryKey
+  - Dark violet (key background): hsl(281, 89%, 26%)
+  - Vivid magenta (key shadow): hsl(285, 91%, 52%)
 
-- Dark violet (key background): hsl(281, 89%, 26%)
-- Vivid magenta (key shadow): hsl(285, 91%, 52%)
+- secondaryKey
+  - Pure cyan (key background, toggle): hsl(176, 100%, 44%)
+  - Soft cyan (key shadow): hsl(177, 92%, 70%)
 
-- Pure cyan (key background, toggle): hsl(176, 100%, 44%)
-- Soft cyan (key shadow): hsl(177, 92%, 70%)
-
-- Very dark violet (key background): hsl(268, 47%, 21%)
-- Dark magenta (key shadow): hsl(290, 70%, 36%)
+- defaultKey
+  - Very dark violet (key background): hsl(268, 47%, 21%)
+  - Dark magenta (key shadow): hsl(290, 70%, 36%)
 
 #### Text
-
 - Light yellow: hsl(52, 100%, 62%)
 - Very dark blue: hsl(198, 20%, 13%)
 - White (text): hsl(0, 0%, 100%)

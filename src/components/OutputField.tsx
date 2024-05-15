@@ -1,4 +1,5 @@
 type props = {
+  style: React.CSSProperties;
   children?: React.ReactNode;
   className?: string;
 };
@@ -6,7 +7,9 @@ type props = {
 function OutputField(props: props) {
   return (
     <>
-      <div className={props.className}>{props.children}</div>
+      <div className={props.className} style={props.style}>
+        {props.children}
+      </div>
     </>
   );
 }
