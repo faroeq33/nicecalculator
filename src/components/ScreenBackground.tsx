@@ -4,7 +4,7 @@ type props = {
   className?: string;
 };
 
-function OutputField(props: props) {
+function ScreenBackground(props: props) {
   return (
     <>
       <div className={props.className} style={props.style}>
@@ -13,4 +13,4 @@ function OutputField(props: props) {
     </>
   );
 }
-export default OutputField;
+export default ScreenBackground;

@@ -1,4 +1,5 @@
 import { useThemeContext } from "../../context/useThemeContext";
+import { themeColors } from "../themeColors";
 
 type Props = {
   key?: number;
@@ -8,7 +9,7 @@ type Props = {
 };
 
 function NumberKey(props: Props) {
-  const { theme, themeColors } = useThemeContext();
+  const { theme } = useThemeContext();
   return (
     <>
       <div

@@ -2,7 +2,7 @@
 //   children?: React.ReactNode;
 // };
 
-import OutputField from "../OutputField";
+import ScreenBackground from "../ScreenBackground";
 import ToggleNumber from "../togglemenu/ToggleNumber";
 import ToggleCol from "../togglemenu/ToggleCol";
 import ToggleButton from "../togglemenu/ToggleButton";
@@ -10,17 +10,29 @@ import { useThemeContext } from "../../context/useThemeContext";
 import NumberKey from "./NumberKey";
 import CalcKey, { CustomProps } from "./CalcKey";
 import { CSSProperties } from "react";
+import { themeColors } from "../themeColors";
 
 function Calc() {
-  const { theme, themeColors } = useThemeContext();
+  const { theme } = useThemeContext();
 
-  const textColor: CSSProperties = {
-    color:
-      theme === 1
-        ? themeColors[theme].text.veryDarkGrayishBlue
-        : themeColors[theme].text.white,
+  const textSwitch = () => {
+    if (theme === 2) {
+      return themeColors[2].text.lightYellow;
+    }
+    if (theme === 1) {
+      return themeColors[1].text.veryDarkGrayishBlue;
+    }
+    if (theme === 0) {
+      return themeColors[0].text.white;
+    }
+    return "";
   };
 
+  const textColor: CSSProperties = {
+    color: textSwitch(),
+  };
+
+  // for reset and delete buttons
   const tertiaryColor = {
     background: themeColors[theme].myKeys.tertiaryKey.keyBackground,
     boxShadow: themeColors[theme].myKeys.tertiaryKey.keyShadow,
@@ -59,7 +71,7 @@ function Calc() {
           </div>
         </div>
 
-        <OutputField
+        <ScreenBackground
           className="p-6 text-4xl font-extrabold text-right rounded-md outputfield "
           style={{
             background: themeColors[theme]?.backgrounds.screenBackground,
@@ -67,7 +79,7 @@ function Calc() {
           }}
         >
           399,981
-        </OutputField>
+        </ScreenBackground>
 
         <div
           className="p-4 mt-4 rounded-md shadow-sm calcwrapper"

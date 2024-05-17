@@ -1,7 +1,8 @@
 import { useThemeContext } from "../../context/useThemeContext";
+import { themeColors } from "../themeColors";
 
 function ToggleButton() {
-  const { themeColors, theme, setTheme } = useThemeContext();
+  const { theme, setTheme } = useThemeContext();
 
   const increment = () => {
     if (theme >= 2) {

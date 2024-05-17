@@ -1,4 +1,4 @@
-import { CustomProps } from "../Calc/Calc";
+import { CustomProps } from "../Calc/CalcKey";
 
 function ToggleCol(props: CustomProps) {
   return (
