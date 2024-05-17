@@ -11,6 +11,7 @@ import { useThemeContext } from "../context/useThemeContext";
 
 function Calc() {
   const { theme, themeColors } = useThemeContext();
+
   return (
     <>
       <div
@@ -63,8 +64,8 @@ function Calc() {
             <CalcKey
               className="flex items-center justify-center text-xl text-center rounded-md shadow-sm "
               style={{
-                background: themeColors[0].myKeys.tertiaryKey.keyBackground,
-                boxShadow: themeColors[0].myKeys.tertiaryKey.keyShadow,
+                background: themeColors[theme].myKeys.secondaryKey.light,
+                boxShadow: themeColors[theme].myKeys.secondaryKey.dark,
               }}
             >
               <span className="font-bold uppercase">Del</span>
@@ -80,12 +81,12 @@ function Calc() {
             <CalcNumberKey number={"."} />
             <CalcNumberKey number={0} />
             <CalcNumberKey number={"/"} />
-
+            <CalcNumberKey number={"x"} />
             <CalcKey
               className="col-span-2 p-4 text-xl text-center rounded-md shadow-sm "
               style={{
-                background: themeColors[theme].myKeys.tertiaryKey.keyBackground,
-                boxShadow: themeColors[theme].myKeys.tertiaryKey.keyShadow,
+                background: themeColors[theme].myKeys.secondaryKey.light,
+                boxShadow: themeColors[theme].myKeys.secondaryKey.dark,
               }}
             >
               <span className="font-bold uppercase">Reset</span>
@@ -94,8 +95,9 @@ function Calc() {
             <CalcKey
               className="col-span-2 p-4 text-center rounded-md shadow-sm "
               style={{
-                background: themeColors[theme].myKeys.primaryKey.light,
-                boxShadow: themeColors[theme].myKeys.primaryKey.dark,
+                background:
+                  themeColors[theme].myKeys.tertiaryKey?.keyBackground,
+                boxShadow: themeColors[theme].myKeys.tertiaryKey?.keyShadow,
               }}
             >
               <span className="font-bold uppercase">=</span>

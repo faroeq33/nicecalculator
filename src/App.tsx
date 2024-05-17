@@ -15,8 +15,8 @@ function App() {
       },
       myKeys: {
         tertiaryKey: {
-          keyBackground: "hsl(30, 25%, 89%)",
-          keyShadow: "hsl(28, 16%, 65%)",
+          keyBackground: "hsl(225, 21%, 49%)",
+          keyShadow: "hsl(224, 28%, 35%)",
         },
         secondaryKey: { light: "#cf3f34", dark: "hsl(6, 70%, 34%)" },
         primaryKey: {
