@@ -33,7 +33,7 @@ function Calc() {
   };
 
   // for reset and delete buttons
-  const tertiaryColor = {
+  const tertiaryColor: CSSProperties = {
     background: themeColors[theme].myKeys.tertiaryKey.keyBackground,
     boxShadow: themeColors[theme].myKeys.tertiaryKey.keyShadow,
   };
@@ -82,7 +82,7 @@ function Calc() {
         </ScreenBackground>
 
         <div
-          className="p-4 mt-4 rounded-md shadow-sm calcwrapper"
+          className="p-4 mt-4 rounded-md calcwrapper"
           style={{
             background: themeColors[theme].backgrounds.toggleBackground,
           }}
@@ -110,14 +110,14 @@ function Calc() {
             <NumberKey number={"/"} />
             <NumberKey number={"x"} />
             <CalcKey
-              className="col-span-2 p-4 text-xl text-center text-white rounded-md shadow-sm"
+              className="col-span-2 p-4 text-xl text-center text-white rounded-md "
               style={{ ...tertiaryColor }}
             >
               <span className="font-bold uppercase">Reset</span>
             </CalcKey>
 
             <CalcKey
-              className="col-span-2 p-4 text-center rounded-md shadow-sm "
+              className="col-span-2 p-4 text-center rounded-md "
               style={{
                 backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
                 boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,

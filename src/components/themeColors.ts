@@ -1,4 +1,4 @@
-export const shadowValue = "inset 0 -0.25em 0 0 ";
+export const shadowValue = "inset 0 -0.25em 1px 0 ";
 export const themeColors = [
   {
     backgrounds: {
