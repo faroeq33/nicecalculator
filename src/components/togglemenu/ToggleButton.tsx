@@ -12,15 +12,16 @@ function ToggleButton() {
           theme === 3 ? "justify-end" : ""
         } w-full  p-2 rounded-full cursor-pointer`}
         style={{
-          backgroundColor: themeColors[0].backgrounds.toggleBackground,
-          boxShadow: themeColors[0].myKeys.secondaryKey.light,
+          backgroundColor: themeColors[theme].backgrounds.toggleBackground,
+          boxShadow: themeColors[theme].myKeys.secondaryKey.light,
         }}
         onClick={increment}
       >
         <div
           className="w-4 h-4 rounded-full"
           style={{
-            background: themeColors[0].myKeys.primaryKey.dark,
+            backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
+            boxShadow: themeColors[theme].myKeys.secondaryKey.light,
           }}
         >
           {/* {theme} */}
