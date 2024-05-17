@@ -7,7 +7,7 @@ import OutputField from "./OutputField";
 import ToggleNumber from "./togglemenu/ToggleNumber";
 import ToggleCol from "./togglemenu/ToggleCol";
 import ToggleButton from "./togglemenu/ToggleButton";
-import { useThemeContext } from "../App";
+import { useThemeContext } from "../context/useThemeContext";
 
 function Calc() {
   const { theme, themeColors } = useThemeContext();
@@ -16,7 +16,7 @@ function Calc() {
       <div
         className="h-screen p-6 text-white calc-wrapper"
         style={{
-          background: themeColors[theme].darkDesaturatedBlue,
+          background: themeColors[theme]?.darkDesaturatedBlue,
         }}
       >
         <div className="flex justify-between logo-wrapper">
@@ -63,8 +63,8 @@ function Calc() {
             <CalcKey
               className="flex items-center justify-center text-xl text-center rounded-md shadow-sm "
               style={{
-                background: themeColors[theme].myKeys.tertiaryKey.keyBackground,
-                boxShadow: themeColors[theme].myKeys.tertiaryKey.keyShadow,
+                background: themeColors[0].myKeys.tertiaryKey.keyBackground,
+                boxShadow: themeColors[0].myKeys.tertiaryKey.keyShadow,
               }}
             >
               <span className="font-bold uppercase">Del</span>
@@ -80,7 +80,6 @@ function Calc() {
             <CalcNumberKey number={"."} />
             <CalcNumberKey number={0} />
             <CalcNumberKey number={"/"} />
-            <CalcNumberKey number={"x"} />
 
             <CalcKey
               className="col-span-2 p-4 text-xl text-center rounded-md shadow-sm "

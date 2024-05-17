@@ -1,4 +1,4 @@
-import { useThemeContext } from "../../App";
+import { useThemeContext } from "../../context/useThemeContext";
 
 function ToggleButton() {
   const { theme, themeColors, increment } = useThemeContext();
