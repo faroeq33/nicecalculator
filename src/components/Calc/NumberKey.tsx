@@ -1,5 +1,5 @@
 import { useThemeContext } from "../../context/useThemeContext";
-import { themeColors } from "../themeColors";
+import { shadowValue, themeColors } from "../themeColors";
 
 type Props = {
   key?: number;
@@ -17,7 +17,7 @@ function NumberKey(props: Props) {
         className="p-4 text-center rounded-md shadow-sm"
         style={{
           background: themeColors[theme].myKeys.primaryKey.light,
-          boxShadow: themeColors[theme].myKeys.primaryKey.dark,
+          boxShadow: `${shadowValue} ${themeColors[theme].myKeys.primaryKey.dark}`,
         }}
       >
         {" "}

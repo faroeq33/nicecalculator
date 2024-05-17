@@ -1,3 +1,4 @@
+export const shadowValue = "inset 0 -0.25em 0 0 ";
 export const themeColors = [
   {
     backgrounds: {
@@ -8,7 +9,7 @@ export const themeColors = [
     myKeys: {
       tertiaryKey: {
         keyBackground: "hsl(225, 21%, 49%)",
-        keyShadow: "hsl(224, 28%, 35%)",
+        keyShadow: `${shadowValue} hsl(224, 28%, 35%)`,
       },
       secondaryKey: { light: "#cf3f34", dark: "hsl(6, 70%, 34%)" },
       primaryKey: {
@@ -30,7 +31,7 @@ export const themeColors = [
     myKeys: {
       tertiaryKey: {
         keyBackground: "hsl(185, 42%, 37%)",
-        keyShadow: "hsl(185, 58%, 25%)",
+        keyShadow: `${shadowValue} hsl(185, 58%, 25%)`,
       },
       secondaryKey: { light: "hsl(25, 98%, 40%)", dark: "hsl(25, 99%, 27%)" },
       primaryKey: {
@@ -52,7 +53,7 @@ export const themeColors = [
     myKeys: {
       tertiaryKey: {
         keyBackground: "hsl(281, 89%, 26%)",
-        keyShadow: "hsl(285, 91%, 52%)",
+        keyShadow: `${shadowValue} hsl(285, 91%, 52%)`,
       },
       secondaryKey: {
         light: "hsl(176, 100%, 44%)",

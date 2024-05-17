@@ -11,6 +11,11 @@ function ToggleButton() {
       setTheme(theme + 1);
     }
   };
+
+  const getToggleButtonSize = () => {
+    const size = "1em";
+    return { width: size, height: size };
+  };
   return (
     <>
       <div
@@ -26,8 +31,9 @@ function ToggleButton() {
         onClick={increment}
       >
         <div
-          className="w-4 h-4 rounded-full"
+          className="rounded-full "
           style={{
+            ...getToggleButtonSize(),
             backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
             boxShadow: themeColors[theme].myKeys.secondaryKey.light,
           }}

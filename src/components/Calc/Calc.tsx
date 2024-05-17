@@ -10,7 +10,7 @@ import { useThemeContext } from "../../context/useThemeContext";
 import NumberKey from "./NumberKey";
 import CalcKey, { CustomProps } from "./CalcKey";
 import { CSSProperties } from "react";
-import { themeColors } from "../themeColors";
+import { shadowValue, themeColors } from "../themeColors";
 
 function Calc() {
   const { theme } = useThemeContext();
@@ -92,10 +92,8 @@ function Calc() {
             <NumberKey number={8} />
             <NumberKey number={9} />
             <CalcKey
-              className="flex items-center justify-center text-xl text-center text-white rounded-md shadow-sm "
-              style={{
-                ...tertiaryColor,
-              }}
+              className="flex items-center justify-center text-xl text-center text-white rounded-md"
+              style={tertiaryColor}
             >
               <span className="font-bold uppercase">Del</span>
             </CalcKey>
@@ -112,7 +110,7 @@ function Calc() {
             <NumberKey number={"/"} />
             <NumberKey number={"x"} />
             <CalcKey
-              className="col-span-2 p-4 text-xl text-center text-white rounded-md shadow-sm "
+              className="col-span-2 p-4 text-xl text-center text-white rounded-md shadow-sm"
               style={{ ...tertiaryColor }}
             >
               <span className="font-bold uppercase">Reset</span>
@@ -122,6 +120,7 @@ function Calc() {
               className="col-span-2 p-4 text-center rounded-md shadow-sm "
               style={{
                 backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
+                boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,
               }}
             >
               <span className="font-bold uppercase">=</span>
