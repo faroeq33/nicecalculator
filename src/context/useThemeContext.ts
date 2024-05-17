@@ -5,7 +5,6 @@ interface ThemeContextInterface {
   themeColors: ThemeConfig[];
   theme: number;
   setTheme: Dispatch<SetStateAction<number>>;
-  increment: () => void;
 }
 
 export const ThemeContext = createContext<ThemeContextInterface>({
@@ -27,16 +26,14 @@ export const ThemeContext = createContext<ThemeContextInterface>({
           dark: "hsl(28, 16%, 65%)",
         },
       },
-      darkDesaturatedBlue: "hsl(222, 26%, 31%)",
       text: {
-        veryDarkGrayishBlue: "hsl(221, 14%, 31%)",
+        veryDarkBlue: "hsl(221, 14%, 31%)",
         white: "hsl(0, 0%, 100%)",
       },
     },
   ],
   theme: 0,
   setTheme: () => {}, // Dit is een tijdelijke placeholder
-  increment: () => {}, // Dit is een tijdelijke placeholder
 });
 export const useThemeContext = () => useContext(ThemeContext);
 export interface Backgrounds {
@@ -67,13 +64,15 @@ export interface MyKeys {
 }
 
 export interface Text {
-  veryDarkGrayishBlue: string;
-  white: string;
+  lightYellow?: string;
+  veryDarkGrayishYellow?: string;
+  veryDarkGrayishBlue?: string;
+  veryDarkBlue?: string;
+  white?: string;
 }
 
 export interface ThemeConfig {
   backgrounds: Backgrounds;
   myKeys: MyKeys;
-  darkDesaturatedBlue: string;
   text: Text;
 }
