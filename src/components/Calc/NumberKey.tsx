@@ -6,6 +6,7 @@ type Props = {
   number: number | string;
   className?: string;
   textColor?: string;
+  onClick?: () => void;
 };
 
 function NumberKey(props: Props) {
@@ -19,6 +20,7 @@ function NumberKey(props: Props) {
           background: themeColors[theme].myKeys.primaryKey.light,
           boxShadow: `${shadowValue} ${themeColors[theme].myKeys.primaryKey.dark}`,
         }}
+        onClick={props.onClick}
       >
         {" "}
         <span

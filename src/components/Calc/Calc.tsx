@@ -9,11 +9,32 @@ import ToggleButton from "../togglemenu/ToggleButton";
 import { useThemeContext } from "../../context/useThemeContext";
 import NumberKey from "./NumberKey";
 import CalcKey, { CustomProps } from "./CalcKey";
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 import { shadowValue, themeColors } from "../themeColors";
 
 function Calc() {
   const { theme } = useThemeContext();
+
+  const [result, setResult] = useState<number>(0);
+  const [screen, setScreen] = useState<string>(``);
+  // Define the event handlers for each action
+
+  const handleReset = () => {
+    if (screen === ``) return;
+    setScreen(``);
+    setResult(0);
+  };
+
+  const handleCalculation = (num: number) => {
+    if (result === 0) {
+      setScreen(`${num}`);
+      return;
+    }
+    setScreen(`${result}${num}`);
+  };
+  const handleScreen = () => {
+    setScreen(`${result} + `);
+  };
 
   const textSwitch = () => {
     if (theme === 2) {
@@ -78,7 +99,7 @@ function Calc() {
             ...textColor,
           }}
         >
-          399,981
+          {screen}
         </ScreenBackground>
 
         <div
@@ -88,30 +109,31 @@ function Calc() {
           }}
         >
           <Keypad className="grid grid-cols-4 gap-3 p-3">
-            <NumberKey number={7} />
-            <NumberKey number={8} />
-            <NumberKey number={9} />
+            <NumberKey number={7} onClick={() => handleCalculation(7)} />
+            <NumberKey number={8} onClick={() => handleCalculation(8)} />
+            <NumberKey number={9} onClick={() => handleCalculation(9)} />
             <CalcKey
               className="flex items-center justify-center text-xl text-center text-white rounded-md"
               style={tertiaryColor}
             >
               <span className="font-bold uppercase">Del</span>
             </CalcKey>
-            <NumberKey number={4} />
-            <NumberKey number={5} />
-            <NumberKey number={6} />
-            <NumberKey number={"+"} />
-            <NumberKey number={1} />
-            <NumberKey number={2} />
-            <NumberKey number={3} />
+            <NumberKey number={4} onClick={() => handleCalculation(4)} />
+            <NumberKey number={5} onClick={() => handleCalculation(5)} />
+            <NumberKey number={6} onClick={() => handleCalculation(6)} />
+            <NumberKey number={"+"} onClick={handleScreen} />
+            <NumberKey number={1} onClick={() => handleCalculation(1)} />
+            <NumberKey number={2} onClick={() => handleCalculation(2)} />
+            <NumberKey number={3} onClick={() => handleCalculation(4)} />
             <NumberKey number={"-"} />
             <NumberKey number={"."} />
-            <NumberKey number={0} />
+            <NumberKey number={0} onClick={() => handleCalculation(0)} />
             <NumberKey number={"/"} />
             <NumberKey number={"x"} />
             <CalcKey
               className="col-span-2 p-4 text-xl text-center text-white rounded-md "
               style={{ ...tertiaryColor }}
+              onClick={handleReset}
             >
               <span className="font-bold uppercase">Reset</span>
             </CalcKey>
