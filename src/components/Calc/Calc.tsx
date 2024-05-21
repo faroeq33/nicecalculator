@@ -7,16 +7,102 @@ import ToggleNumber from "../togglemenu/ToggleNumber";
 import ToggleCol from "../togglemenu/ToggleCol";
 import ToggleButton from "../togglemenu/ToggleButton";
 import { useThemeContext } from "../../context/useThemeContext";
-import DigitKey from "./DigitKey";
-import CalcKey, { CustomProps } from "./CalcKey";
-import { CSSProperties } from "react";
+import DigitButton from "./DigitButton";
+import CalcKey from "./CalcKey";
+import { CSSProperties, useReducer } from "react";
 import { shadowValue, themeColors } from "../themeColors";
-import { useCalculationContext } from "../../context/useCalculationContext";
+import OperationButton from "./OperationButton";
+import Keypad from "./Keypad";
 
+// 3. Preventing typos with constant object, Write actions object
+// 2. write reducer function (state, {type, payload}) => {switch(type) {}}
+
+export const ACTIONS = {
+  ADD_DIGIT: "add-digit",
+  CLEAR: "clear",
+  DELETE_DIGIT: "delete-digit",
+  CHOOSE_OPERATION: "choose_operation",
+  EVALUATE: "evaluate",
+};
+
+type DispatchType = {
+  type: string;
+  payload?: string;
+};
+
+function reducer(state, { type, payload }: DispatchType) {
+  switch (type) {
+    case ACTIONS.ADD_DIGIT:
+      if (payload === "0" && state.currentOperand === "0") {
+        return state;
+      }
+      if (payload === "." && state.currentOperand.include(".")) {
+        return state;
+      }
+
+      return {
+        ...state,
+        currentOperand: state.currentOperand + payload,
+      };
+    case ACTIONS.CHOOSE_OPERATION:
+      if (state.currentOperand === null && state.previousOperand === null) {
+        return state;
+      }
+      if (state.previousOperand == null) {
+        return {
+          ...state,
+          operation: payload,
+          previousOperand: state.currentOperand,
+          currentOperand: null,
+        };
+      }
+      return {
+        ...state,
+        previousOperand: evaluate(state),
+        operation: payload,
+        currentOperand: null,
+      };
+    case ACTIONS.CLEAR:
+      return {
+        currentOperand: null,
+        previousOperand: null,
+        operation: null,
+      };
+  }
+}
+function evaluate({ currentOperand, previousOperand, operation }) {
+  const prev = parseFloat(previousOperand);
+  const curr = parseFloat(currentOperand);
+  if (isNaN(prev) || isNaN(curr)) return "";
+  let computation: string | number = "";
+  switch (operation) {
+    case "+":
+      computation = prev + curr;
+      break;
+    case "-":
+      computation = prev - curr;
+      break;
+    case "/":
+      computation = prev / curr;
+      break;
+    case "x":
+      computation = prev * curr;
+      break;
+  }
+  return `${computation}`;
+}
+
+const initialState = {
+  currentOperand: "",
+  previousOperand: "",
+  operation: "",
+};
 function Calc() {
   const { theme } = useThemeContext();
-
-  const { state, dispatch, dispatchers } = useCalculationContext();
+  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   // Define the event handlers for each action
 
@@ -83,8 +169,10 @@ function Calc() {
             ...textColor,
           }}
         >
-          <div className="previous-operand">{state.screen}</div>
-          <div className="previous-operand">{state.operator}</div>
+          <div className="previous-operand">
+            {previousOperand}, {operation}
+          </div>
+          <div className="current-operand">{currentOperand}</div>
         </ScreenBackground>
         <div
           className="p-4 mt-4 rounded-md calcwrapper"
@@ -93,61 +181,48 @@ function Calc() {
           }}
         >
           <Keypad className="grid grid-cols-4 gap-3 p-3">
-            <DigitKey title={7} />
-            <DigitKey title={8} />
-            <DigitKey title={9} />
+            {/*  5. same as step 4 but for operator button */}
+            {/*  4. Tell reducer what action we want to do via passing dispatch inside digitkey component */}
+            <DigitButton digit="7" dispatch={dispatch} />
+            <DigitButton digit="8" dispatch={dispatch} />
+            <DigitButton digit="9" dispatch={dispatch} />
             <CalcKey
               className="flex items-center justify-center text-xl text-center text-white rounded-md"
               style={tertiaryColor}
             >
               <span className="font-bold uppercase">Del</span>
             </CalcKey>
-            <DigitKey title={4} />
-            <DigitKey title={5} />
-            <DigitKey title={6} />
-            <DigitKey
-              title={"+"}
-              onClick={() => dispatch({ type: "operator", operator: "+" })}
-            />
+            <DigitButton digit="4" dispatch={dispatch} />
+            <DigitButton digit="5" dispatch={dispatch} />
+            <DigitButton digit="6" dispatch={dispatch} />
+            <OperationButton operation="+" dispatch={dispatch} />
 
-            <DigitKey title={1} />
-            <DigitKey title={2} />
-            <DigitKey title={3} />
-            <DigitKey
-              title={"-"}
-              onClick={() => dispatch({ type: "operator", operator: "-" })}
-            />
-            <DigitKey
-              title={"."}
-              onClick={() => dispatch({ type: "operator", operator: "." })}
-            />
-            <DigitKey title={0} />
-            <DigitKey
-              title={"/"}
-              onClick={() => dispatch({ type: "operator", operator: "/" })}
-            />
-            <DigitKey
-              title={"x"}
-              onClick={() => dispatch({ type: "operator", operator: "x" })}
-            />
+            <DigitButton digit="1" />
+            <DigitButton digit="2" />
+            <DigitButton digit="3" />
+            <OperationButton operation="-" dispatch={dispatch} />
+            <OperationButton operation="." dispatch={dispatch} />
+            <DigitButton digit="0" />
+            <OperationButton operation="/" dispatch={dispatch} />
+            <OperationButton operation="x" dispatch={dispatch} />
             <CalcKey
               className="col-span-2 p-4 text-xl text-center text-white rounded-md "
               style={{ ...tertiaryColor }}
-              onClick={dispatchers.dispatchReset}
+              onClick={() => dispatch({ type: ACTIONS.CLEAR })}
             >
               <span className="font-bold uppercase">Reset</span>
             </CalcKey>
 
-            <CalcKey
+            {/* <CalcKey
               className="col-span-2 p-4 text-center rounded-md "
-              onClick={dispatchers.dispatchResult}
+              onClick={handleResult}
               style={{
                 backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
                 boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,
               }}
             >
               <span className="font-bold uppercase">=</span>
-            </CalcKey>
+            </CalcKey> */}
           </Keypad>
         </div>
       </div>
@@ -155,11 +230,4 @@ function Calc() {
   );
 }
 
-function Keypad(props: CustomProps) {
-  return (
-    <>
-      <div className={props.className}>{props.children}</div>
-    </>
-  );
-}
 export default Calc;

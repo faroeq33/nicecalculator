@@ -1,33 +1,25 @@
-import { useCalculationContext } from "../../context/useCalculationContext";
 import { useThemeContext } from "../../context/useThemeContext";
 import { shadowValue, themeColors } from "../themeColors";
+import { ACTIONS } from "./Calc";
 
 type Props = {
-  key?: number;
-  title: number | string;
+  digit: string;
   className?: string;
   textColor?: string;
-  onClick?: () => void;
+  dispatch?: React.Dispatch<object>;
 };
 
-function DigitKey(props: Props) {
+function DigitButton({ digit, dispatch }: Props) {
   const { theme } = useThemeContext();
-  const { dispatchers } = useCalculationContext();
   return (
     <>
-      <div
-        key={props.key}
+      <button
         className="p-4 text-center rounded-md shadow-sm hover:cursor-pointer"
         style={{
           background: themeColors[theme].myKeys.primaryKey.light,
           boxShadow: `${shadowValue} ${themeColors[theme].myKeys.primaryKey.dark}`,
         }}
-        onClick={
-          props.onClick
-            ? props.onClick
-            : () =>
-                dispatchers.dispatchCalculation((props.title as number) || 0)
-        }
+        onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: digit })}
       >
         <span
           className="text-4xl font-bold"
@@ -35,11 +27,11 @@ function DigitKey(props: Props) {
             color: themeColors[theme].text.veryDarkGrayishBlue,
           }}
         >
-          {props.title}
+          {digit}
         </span>
-      </div>
+      </button>
     </>
   );
 }
 
-export default DigitKey;
+export default DigitButton;
