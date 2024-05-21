@@ -7,34 +7,18 @@ import ToggleNumber from "../togglemenu/ToggleNumber";
 import ToggleCol from "../togglemenu/ToggleCol";
 import ToggleButton from "../togglemenu/ToggleButton";
 import { useThemeContext } from "../../context/useThemeContext";
-import NumberKey from "./NumberKey";
+import DigitKey from "./DigitKey";
 import CalcKey, { CustomProps } from "./CalcKey";
-import { CSSProperties, useState } from "react";
+import { CSSProperties } from "react";
 import { shadowValue, themeColors } from "../themeColors";
+import { useCalculationContext } from "../../context/useCalculationContext";
 
 function Calc() {
   const { theme } = useThemeContext();
 
-  const [result, setResult] = useState<number>(0);
-  const [screen, setScreen] = useState<string>(``);
+  const { state, dispatch, dispatchers } = useCalculationContext();
+
   // Define the event handlers for each action
-
-  const handleReset = () => {
-    if (screen === ``) return;
-    setScreen(``);
-    setResult(0);
-  };
-
-  const handleCalculation = (num: number) => {
-    if (result === 0) {
-      setScreen(`${num}`);
-      return;
-    }
-    setScreen(`${result}${num}`);
-  };
-  const handleScreen = () => {
-    setScreen(`${result} + `);
-  };
 
   const textSwitch = () => {
     if (theme === 2) {
@@ -93,15 +77,15 @@ function Calc() {
         </div>
 
         <ScreenBackground
-          className="p-6 text-4xl font-extrabold text-right rounded-md outputfield "
+          className="flex flex-col items-end justify-around p-6 text-4xl font-extrabold text-right break-words break-all rounded-md outputfield"
           style={{
             background: themeColors[theme]?.backgrounds.screenBackground,
             ...textColor,
           }}
         >
-          {screen}
+          <div className="previous-operand">{state.screen}</div>
+          <div className="previous-operand">{state.operator}</div>
         </ScreenBackground>
-
         <div
           className="p-4 mt-4 rounded-md calcwrapper"
           style={{
@@ -109,37 +93,54 @@ function Calc() {
           }}
         >
           <Keypad className="grid grid-cols-4 gap-3 p-3">
-            <NumberKey number={7} onClick={() => handleCalculation(7)} />
-            <NumberKey number={8} onClick={() => handleCalculation(8)} />
-            <NumberKey number={9} onClick={() => handleCalculation(9)} />
+            <DigitKey title={7} />
+            <DigitKey title={8} />
+            <DigitKey title={9} />
             <CalcKey
               className="flex items-center justify-center text-xl text-center text-white rounded-md"
               style={tertiaryColor}
             >
               <span className="font-bold uppercase">Del</span>
             </CalcKey>
-            <NumberKey number={4} onClick={() => handleCalculation(4)} />
-            <NumberKey number={5} onClick={() => handleCalculation(5)} />
-            <NumberKey number={6} onClick={() => handleCalculation(6)} />
-            <NumberKey number={"+"} onClick={handleScreen} />
-            <NumberKey number={1} onClick={() => handleCalculation(1)} />
-            <NumberKey number={2} onClick={() => handleCalculation(2)} />
-            <NumberKey number={3} onClick={() => handleCalculation(4)} />
-            <NumberKey number={"-"} />
-            <NumberKey number={"."} />
-            <NumberKey number={0} onClick={() => handleCalculation(0)} />
-            <NumberKey number={"/"} />
-            <NumberKey number={"x"} />
+            <DigitKey title={4} />
+            <DigitKey title={5} />
+            <DigitKey title={6} />
+            <DigitKey
+              title={"+"}
+              onClick={() => dispatch({ type: "operator", operator: "+" })}
+            />
+
+            <DigitKey title={1} />
+            <DigitKey title={2} />
+            <DigitKey title={3} />
+            <DigitKey
+              title={"-"}
+              onClick={() => dispatch({ type: "operator", operator: "-" })}
+            />
+            <DigitKey
+              title={"."}
+              onClick={() => dispatch({ type: "operator", operator: "." })}
+            />
+            <DigitKey title={0} />
+            <DigitKey
+              title={"/"}
+              onClick={() => dispatch({ type: "operator", operator: "/" })}
+            />
+            <DigitKey
+              title={"x"}
+              onClick={() => dispatch({ type: "operator", operator: "x" })}
+            />
             <CalcKey
               className="col-span-2 p-4 text-xl text-center text-white rounded-md "
               style={{ ...tertiaryColor }}
-              onClick={handleReset}
+              onClick={dispatchers.dispatchReset}
             >
               <span className="font-bold uppercase">Reset</span>
             </CalcKey>
 
             <CalcKey
               className="col-span-2 p-4 text-center rounded-md "
+              onClick={dispatchers.dispatchResult}
               style={{
                 backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
                 boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,
