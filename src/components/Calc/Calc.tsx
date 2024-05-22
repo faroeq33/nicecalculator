@@ -76,9 +76,11 @@ function Calc() {
                   </div>
                 </ToggleCol>
                 <ToggleCol>
-                  <span className="h-4 text-xs text-right uppercase">
-                    theme
-                  </span>
+                  <div className="flex justify-between">
+                    <span className="w-full text-xs text-center uppercase ">
+                      theme
+                    </span>
+                  </div>
                 </ToggleCol>
                 <ToggleCol>
                   <ToggleButton />
