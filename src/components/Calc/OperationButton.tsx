@@ -1,15 +1,26 @@
 import { useThemeContext } from "../../context/useThemeContext";
 import { shadowValue, themeColors } from "../themeColors";
 import { ACTIONS } from "./ACTIONS";
+import { DispatchType } from "./CalculatorLogic";
 
 type Props = {
-  operation: number | string;
+  title: string;
   className?: string;
   textColor?: string;
-  dispatch?: React.Dispatch<object>;
+  dispatch?: React.Dispatch<DispatchType>;
 };
 
-function OperationButton({ dispatch, operation }: Props) {
+const formatOperationSymbol = (title) => {
+  if (title === "x") {
+    return "*";
+  }
+  if (title === "÷") {
+    return "/";
+  }
+  return title;
+};
+
+function OperationButton({ dispatch, title }: Props) {
   const { theme } = useThemeContext();
   return (
     <>
@@ -20,7 +31,10 @@ function OperationButton({ dispatch, operation }: Props) {
           boxShadow: `${shadowValue} ${themeColors[theme].myKeys.primaryKey.dark}`,
         }}
         onClick={() =>
-          dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: { operation } })
+          dispatch({
+            type: ACTIONS.CHOOSE_OPERATION,
+            payload: { operation: formatOperationSymbol(title) },
+          })
         }
       >
         <span
@@ -29,7 +43,7 @@ function OperationButton({ dispatch, operation }: Props) {
             color: themeColors[theme].text.veryDarkGrayishBlue,
           }}
         >
-          {operation}
+          {title}
         </span>
       </button>
     </>

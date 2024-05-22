@@ -114,14 +114,14 @@ function evaluate({ currentOperand, previousOperand, operation }: CalcState) {
     case "*":
       computation = prev * current;
       break;
-    case "÷":
+    case "/":
       computation = prev / current;
       break;
   }
   return `${computation}`;
 }
 
-const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
+const INTEGER_FORMATTER = new Intl.NumberFormat("nl-NL", {
   maximumFractionDigits: 0,
 });
 

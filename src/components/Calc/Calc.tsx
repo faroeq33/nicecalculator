@@ -94,9 +94,9 @@ function Calc() {
           }}
         >
           <div className="previous-operand">
-            {previousOperand} {operation}
+            {formatOperand(previousOperand)} {operation}
           </div>
-          <div className="current-operand">{currentOperand}</div>
+          <div className="current-operand">{formatOperand(currentOperand)}</div>
         </ScreenBackground>
         <div
           className="p-4 mt-4 rounded-md calcwrapper"
@@ -105,8 +105,6 @@ function Calc() {
           }}
         >
           <Keypad className="grid grid-cols-4 gap-3 p-3">
-            {/*  5. same as step 4 but for operator button */}
-            {/*  4. Tell reducer what action we want to do via passing dispatch inside digitkey component */}
             <DigitButton digit="7" dispatch={dispatch} />
             <DigitButton digit="8" dispatch={dispatch} />
             <DigitButton digit="9" dispatch={dispatch} />
@@ -119,16 +117,16 @@ function Calc() {
             <DigitButton digit="4" dispatch={dispatch} />
             <DigitButton digit="5" dispatch={dispatch} />
             <DigitButton digit="6" dispatch={dispatch} />
-            <OperationButton operation="+" dispatch={dispatch} />
+            <OperationButton title="+" dispatch={dispatch} />
 
             <DigitButton digit="1" dispatch={dispatch} />
             <DigitButton digit="2" dispatch={dispatch} />
             <DigitButton digit="3" dispatch={dispatch} />
-            <OperationButton operation="-" dispatch={dispatch} />
-            <OperationButton operation="." dispatch={dispatch} />
+            <OperationButton title="-" dispatch={dispatch} />
+            <OperationButton title="." dispatch={dispatch} />
             <DigitButton digit="0" dispatch={dispatch} />
-            <OperationButton operation="/" dispatch={dispatch} />
-            <OperationButton operation="x" dispatch={dispatch} />
+            <OperationButton title="÷" dispatch={dispatch} />
+            <OperationButton title="x" dispatch={dispatch} />
             <CalcKey
               className="col-span-2 p-4 text-xl text-center text-white rounded-md "
               style={{ ...tertiaryColor }}
