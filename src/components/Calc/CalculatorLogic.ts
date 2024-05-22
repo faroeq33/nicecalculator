@@ -1,4 +1,4 @@
-import { ACTIONS } from "./ACTIONS";
+import { ACTIONS } from "../../data/ACTIONS";
 import { CalcState } from "./CalcTypes";
 
 export type Payload = {

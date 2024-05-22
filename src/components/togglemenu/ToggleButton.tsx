@@ -1,5 +1,5 @@
 import { useThemeContext } from "../../context/useThemeContext";
-import { themeColors } from "../themeColors";
+import { themeColors } from "../../data/themeColors";
 
 function ToggleButton() {
   const { theme, setTheme } = useThemeContext();

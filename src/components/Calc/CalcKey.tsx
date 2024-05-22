@@ -1,16 +1,16 @@
 import { CustomProps } from "./CalcTypes";
 
-function CalcKey(props: CustomProps) {
+function CalcButton(props: CustomProps) {
   return (
     <>
-      <div
+      <button
         className={props.className}
         style={props.style}
         onClick={props.onClick}
       >
         {props.children}
-      </div>
+      </button>
     </>
   );
 }
-export default CalcKey;
+export default CalcButton;

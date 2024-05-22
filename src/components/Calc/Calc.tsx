@@ -8,13 +8,13 @@ import ToggleCol from "../togglemenu/ToggleCol";
 import ToggleButton from "../togglemenu/ToggleButton";
 import { useThemeContext } from "../../context/useThemeContext";
 import DigitButton from "./DigitButton";
-import CalcKey from "./CalcKey";
+import CalcButton from "./CalcKey";
 import { CSSProperties, useReducer } from "react";
-import { shadowValue, themeColors } from "../themeColors";
+import { shadowValue, themeColors } from "../../data/themeColors";
 import OperationButton from "./OperationButton";
 import Keypad from "./Keypad";
 import { reducer, formatOperand } from "./CalculatorLogic";
-import { ACTIONS } from "./ACTIONS";
+import { ACTIONS } from "../../data/ACTIONS";
 
 function Calc() {
   const { theme } = useThemeContext();
@@ -112,13 +112,13 @@ function Calc() {
               <DigitButton digit="7" dispatch={dispatch} />
               <DigitButton digit="8" dispatch={dispatch} />
               <DigitButton digit="9" dispatch={dispatch} />
-              <CalcKey
+              <CalcButton
                 className="flex items-center justify-center text-xl text-center text-white rounded-md"
                 style={tertiaryColor}
                 onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}
               >
                 <span className="font-bold uppercase">Del</span>
-              </CalcKey>
+              </CalcButton>
               <DigitButton digit="4" dispatch={dispatch} />
               <DigitButton digit="5" dispatch={dispatch} />
               <DigitButton digit="6" dispatch={dispatch} />
@@ -131,15 +131,15 @@ function Calc() {
               <DigitButton digit="0" dispatch={dispatch} />
               <OperationButton title="÷" dispatch={dispatch} />
               <OperationButton title="x" dispatch={dispatch} />
-              <CalcKey
+              <CalcButton
                 className="col-span-2 p-4 text-xl text-center text-white rounded-md "
                 style={{ ...tertiaryColor }}
                 onClick={() => dispatch({ type: ACTIONS.CLEAR })}
               >
                 <span className="font-bold uppercase">Reset</span>
-              </CalcKey>
-              <CalcKey
-                className="col-span-2 p-4 text-center rounded-md "
+              </CalcButton>
+              <CalcButton
+                className="col-span-2 p-4 text-center rounded-md"
                 onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
                 style={{
                   backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
@@ -147,7 +147,7 @@ function Calc() {
                 }}
               >
                 <span className="font-bold uppercase">=</span>
-              </CalcKey>
+              </CalcButton>
             </Keypad>
           </div>
         </div>

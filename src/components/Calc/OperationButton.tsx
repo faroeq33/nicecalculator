@@ -1,6 +1,6 @@
 import { useThemeContext } from "../../context/useThemeContext";
-import { shadowValue, themeColors } from "../themeColors";
-import { ACTIONS } from "./ACTIONS";
+import { shadowValue, themeColors } from "../../data/themeColors";
+import { ACTIONS } from "../../data/ACTIONS";
 import { DispatchType } from "./CalculatorLogic";
 
 type Props = {
