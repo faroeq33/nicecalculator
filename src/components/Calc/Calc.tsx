@@ -111,6 +111,7 @@ function Calc() {
             <CalcKey
               className="flex items-center justify-center text-xl text-center text-white rounded-md"
               style={tertiaryColor}
+              onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}
             >
               <span className="font-bold uppercase">Del</span>
             </CalcKey>
