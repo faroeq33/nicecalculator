@@ -28,8 +28,6 @@ function Calc() {
     }
   );
 
-  // Define the event handlers for each action
-
   const textSwitch = () => {
     if (theme === 2) {
       return themeColors[2].text.lightYellow;
@@ -56,97 +54,100 @@ function Calc() {
   return (
     <>
       <div
-        className="h-screen p-6 calc-wrapper"
+        className="p-6 calc-wrapper"
         style={{
           background: themeColors[theme]?.backgrounds.mainBackground,
           ...textColor,
         }}
       >
-        <div className="flex justify-between logo-wrapper">
-          <p className="py-6 text-4xl font-bold" style={{ ...textColor }}>
-            calc
-          </p>
-          <div className="w-1/2 pb-6 text-xl font-extrabold">
-            <div className="flex flex-wrap items-center">
-              <ToggleCol></ToggleCol>
-              <ToggleCol>
-                <div className="flex justify-between px-2 py-1 text-sm">
-                  <ToggleNumber number={1} />
-                  <ToggleNumber number={2} />
-                  <ToggleNumber number={3} />
-                </div>
-              </ToggleCol>
-              <ToggleCol>
-                <span className="h-4 text-xs text-right uppercase">theme</span>
-              </ToggleCol>
-              <ToggleCol>
-                <ToggleButton />
-              </ToggleCol>
+        <div className="h-screen max-w-sm mx-auto">
+          <div className="flex justify-between logo-wrapper">
+            <p className="py-6 text-4xl font-bold" style={{ ...textColor }}>
+              calc
+            </p>
+            <div className="w-1/2 pb-6 text-xl font-extrabold">
+              <div className="flex flex-wrap items-center">
+                <ToggleCol></ToggleCol>
+                <ToggleCol>
+                  <div className="flex justify-between px-2 py-1 text-sm">
+                    <ToggleNumber number={1} />
+                    <ToggleNumber number={2} />
+                    <ToggleNumber number={3} />
+                  </div>
+                </ToggleCol>
+                <ToggleCol>
+                  <span className="h-4 text-xs text-right uppercase">
+                    theme
+                  </span>
+                </ToggleCol>
+                <ToggleCol>
+                  <ToggleButton />
+                </ToggleCol>
+              </div>
             </div>
           </div>
-        </div>
-
-        <ScreenBackground
-          className="flex flex-col items-end justify-around p-6 text-4xl font-extrabold text-right break-words break-all rounded-md outputfield"
-          style={{
-            background: themeColors[theme]?.backgrounds.screenBackground,
-            ...textColor,
-          }}
-        >
-          <div className="previous-operand">
-            {formatOperand(previousOperand)} {operation}
+          <ScreenBackground
+            className="flex flex-col items-end justify-around p-6 text-4xl font-extrabold text-right break-words break-all rounded-md outputfield"
+            style={{
+              background: themeColors[theme]?.backgrounds.screenBackground,
+              ...textColor,
+            }}
+          >
+            <div className="previous-operand">
+              {formatOperand(previousOperand)} {operation}
+            </div>
+            <div className="current-operand">
+              {formatOperand(currentOperand)}
+            </div>
+          </ScreenBackground>
+          <div
+            className="p-4 mt-4 rounded-md calcwrapper"
+            style={{
+              background: themeColors[theme].backgrounds.toggleBackground,
+            }}
+          >
+            <Keypad className="grid grid-cols-4 gap-3 p-3">
+              <DigitButton digit="7" dispatch={dispatch} />
+              <DigitButton digit="8" dispatch={dispatch} />
+              <DigitButton digit="9" dispatch={dispatch} />
+              <CalcKey
+                className="flex items-center justify-center text-xl text-center text-white rounded-md"
+                style={tertiaryColor}
+                onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}
+              >
+                <span className="font-bold uppercase">Del</span>
+              </CalcKey>
+              <DigitButton digit="4" dispatch={dispatch} />
+              <DigitButton digit="5" dispatch={dispatch} />
+              <DigitButton digit="6" dispatch={dispatch} />
+              <OperationButton title="+" dispatch={dispatch} />
+              <DigitButton digit="1" dispatch={dispatch} />
+              <DigitButton digit="2" dispatch={dispatch} />
+              <DigitButton digit="3" dispatch={dispatch} />
+              <OperationButton title="-" dispatch={dispatch} />
+              <OperationButton title="." dispatch={dispatch} />
+              <DigitButton digit="0" dispatch={dispatch} />
+              <OperationButton title="÷" dispatch={dispatch} />
+              <OperationButton title="x" dispatch={dispatch} />
+              <CalcKey
+                className="col-span-2 p-4 text-xl text-center text-white rounded-md "
+                style={{ ...tertiaryColor }}
+                onClick={() => dispatch({ type: ACTIONS.CLEAR })}
+              >
+                <span className="font-bold uppercase">Reset</span>
+              </CalcKey>
+              <CalcKey
+                className="col-span-2 p-4 text-center rounded-md "
+                onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
+                style={{
+                  backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
+                  boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,
+                }}
+              >
+                <span className="font-bold uppercase">=</span>
+              </CalcKey>
+            </Keypad>
           </div>
-          <div className="current-operand">{formatOperand(currentOperand)}</div>
-        </ScreenBackground>
-        <div
-          className="p-4 mt-4 rounded-md calcwrapper"
-          style={{
-            background: themeColors[theme].backgrounds.toggleBackground,
-          }}
-        >
-          <Keypad className="grid grid-cols-4 gap-3 p-3">
-            <DigitButton digit="7" dispatch={dispatch} />
-            <DigitButton digit="8" dispatch={dispatch} />
-            <DigitButton digit="9" dispatch={dispatch} />
-            <CalcKey
-              className="flex items-center justify-center text-xl text-center text-white rounded-md"
-              style={tertiaryColor}
-              onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}
-            >
-              <span className="font-bold uppercase">Del</span>
-            </CalcKey>
-            <DigitButton digit="4" dispatch={dispatch} />
-            <DigitButton digit="5" dispatch={dispatch} />
-            <DigitButton digit="6" dispatch={dispatch} />
-            <OperationButton title="+" dispatch={dispatch} />
-
-            <DigitButton digit="1" dispatch={dispatch} />
-            <DigitButton digit="2" dispatch={dispatch} />
-            <DigitButton digit="3" dispatch={dispatch} />
-            <OperationButton title="-" dispatch={dispatch} />
-            <OperationButton title="." dispatch={dispatch} />
-            <DigitButton digit="0" dispatch={dispatch} />
-            <OperationButton title="÷" dispatch={dispatch} />
-            <OperationButton title="x" dispatch={dispatch} />
-            <CalcKey
-              className="col-span-2 p-4 text-xl text-center text-white rounded-md "
-              style={{ ...tertiaryColor }}
-              onClick={() => dispatch({ type: ACTIONS.CLEAR })}
-            >
-              <span className="font-bold uppercase">Reset</span>
-            </CalcKey>
-
-            <CalcKey
-              className="col-span-2 p-4 text-center rounded-md "
-              onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
-              style={{
-                backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
-                boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,
-              }}
-            >
-              <span className="font-bold uppercase">=</span>
-            </CalcKey>
-          </Keypad>
         </div>
       </div>
     </>
