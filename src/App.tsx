@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Calc from "./components/Calc/Calc";
 import { ThemeContext } from "./context/useThemeContext";
+import Calc from "./components/calc/Calc";
 
 // Definieer een type voor je context
 
