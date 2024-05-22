@@ -1,11 +1,4 @@
-import { CSSProperties } from "react";
-
-export type CustomProps = {
-  style?: CSSProperties;
-  className?: string;
-  children?: React.ReactNode;
-  onClick?: () => void;
-};
+import { CustomProps } from "./CalcTypes";
 
 function CalcKey(props: CustomProps) {
   return (

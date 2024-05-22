@@ -1,6 +1,6 @@
 import { useThemeContext } from "../../context/useThemeContext";
 import { shadowValue, themeColors } from "../themeColors";
-import { ACTIONS } from "./Calc";
+import { ACTIONS } from "./ACTIONS";
 
 type Props = {
   operation: number | string;
@@ -20,7 +20,7 @@ function OperationButton({ dispatch, operation }: Props) {
           boxShadow: `${shadowValue} ${themeColors[theme].myKeys.primaryKey.dark}`,
         }}
         onClick={() =>
-          dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload:  operation  })
+          dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: { operation } })
         }
       >
         <span

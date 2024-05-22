@@ -1,12 +1,13 @@
 import { useThemeContext } from "../../context/useThemeContext";
 import { shadowValue, themeColors } from "../themeColors";
-import { ACTIONS } from "./Calc";
+import { ACTIONS } from "./ACTIONS";
+import { DispatchType } from "./CalculatorLogic";
 
 type Props = {
   digit: string;
   className?: string;
   textColor?: string;
-  dispatch?: React.Dispatch<object>;
+  dispatch: React.Dispatch<DispatchType>;
 };
 
 function DigitButton({ digit, dispatch }: Props) {
@@ -19,7 +20,9 @@ function DigitButton({ digit, dispatch }: Props) {
           background: themeColors[theme].myKeys.primaryKey.light,
           boxShadow: `${shadowValue} ${themeColors[theme].myKeys.primaryKey.dark}`,
         }}
-        onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: digit })}
+        onClick={() =>
+          dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit } })
+        }
       >
         <span
           className="text-4xl font-bold"

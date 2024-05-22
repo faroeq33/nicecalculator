@@ -13,95 +13,19 @@ import { CSSProperties, useReducer } from "react";
 import { shadowValue, themeColors } from "../themeColors";
 import OperationButton from "./OperationButton";
 import Keypad from "./Keypad";
+import { reducer, formatOperand } from "./CalculatorLogic";
+import { ACTIONS } from "./ACTIONS";
 
-// 3. Preventing typos with constant object, Write actions object
-// 2. write reducer function (state, {type, payload}) => {switch(type) {}}
-
-export const ACTIONS = {
-  ADD_DIGIT: "add-digit",
-  CLEAR: "clear",
-  DELETE_DIGIT: "delete-digit",
-  CHOOSE_OPERATION: "choose_operation",
-  EVALUATE: "evaluate",
-};
-
-type DispatchType = {
-  type: string;
-  payload?: string;
-};
-
-function reducer(state, { type, payload }: DispatchType) {
-  switch (type) {
-    case ACTIONS.ADD_DIGIT:
-      if (payload === "0" && state.currentOperand === "0") {
-        return state;
-      }
-      if (payload === "." && state.currentOperand.include(".")) {
-        return state;
-      }
-
-      return {
-        ...state,
-        currentOperand: state.currentOperand + payload,
-      };
-    case ACTIONS.CHOOSE_OPERATION:
-      if (state.currentOperand === null && state.previousOperand === null) {
-        return state;
-      }
-      if (state.previousOperand == null) {
-        return {
-          ...state,
-          operation: payload,
-          previousOperand: state.currentOperand,
-          currentOperand: null,
-        };
-      }
-      return {
-        ...state,
-        previousOperand: evaluate(state),
-        operation: payload,
-        currentOperand: null,
-      };
-    case ACTIONS.CLEAR:
-      return {
-        currentOperand: null,
-        previousOperand: null,
-        operation: null,
-      };
-  }
-}
-function evaluate({ currentOperand, previousOperand, operation }) {
-  const prev = parseFloat(previousOperand);
-  const curr = parseFloat(currentOperand);
-  if (isNaN(prev) || isNaN(curr)) return "";
-  let computation: string | number = "";
-  switch (operation) {
-    case "+":
-      computation = prev + curr;
-      break;
-    case "-":
-      computation = prev - curr;
-      break;
-    case "/":
-      computation = prev / curr;
-      break;
-    case "x":
-      computation = prev * curr;
-      break;
-  }
-  return `${computation}`;
-}
-
-const initialState = {
-  currentOperand: "",
-  previousOperand: "",
-  operation: "",
-};
 function Calc() {
   const { theme } = useThemeContext();
   const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
     reducer,
-    initialState
+    {
+      currentOperand: null,
+      previousOperand: null,
+      operation: null,
+      overwrite: false,
+    }
   );
 
   // Define the event handlers for each action
@@ -170,7 +94,7 @@ function Calc() {
           }}
         >
           <div className="previous-operand">
-            {previousOperand}, {operation}
+            {previousOperand} {operation}
           </div>
           <div className="current-operand">{currentOperand}</div>
         </ScreenBackground>
@@ -197,12 +121,12 @@ function Calc() {
             <DigitButton digit="6" dispatch={dispatch} />
             <OperationButton operation="+" dispatch={dispatch} />
 
-            <DigitButton digit="1" />
-            <DigitButton digit="2" />
-            <DigitButton digit="3" />
+            <DigitButton digit="1" dispatch={dispatch} />
+            <DigitButton digit="2" dispatch={dispatch} />
+            <DigitButton digit="3" dispatch={dispatch} />
             <OperationButton operation="-" dispatch={dispatch} />
             <OperationButton operation="." dispatch={dispatch} />
-            <DigitButton digit="0" />
+            <DigitButton digit="0" dispatch={dispatch} />
             <OperationButton operation="/" dispatch={dispatch} />
             <OperationButton operation="x" dispatch={dispatch} />
             <CalcKey
@@ -213,16 +137,16 @@ function Calc() {
               <span className="font-bold uppercase">Reset</span>
             </CalcKey>
 
-            {/* <CalcKey
+            <CalcKey
               className="col-span-2 p-4 text-center rounded-md "
-              onClick={handleResult}
+              onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
               style={{
                 backgroundColor: themeColors[theme].myKeys.secondaryKey.light,
                 boxShadow: `${shadowValue} ${themeColors[theme].myKeys.secondaryKey.dark}`,
               }}
             >
               <span className="font-bold uppercase">=</span>
-            </CalcKey> */}
+            </CalcKey>
           </Keypad>
         </div>
       </div>

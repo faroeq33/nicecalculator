@@ -1,4 +1,4 @@
-import { CustomProps } from "./CalcKey";
+import { CustomProps } from "./CalcTypes";
 
 function Keypad(props: CustomProps) {
   return (
